@@ -10,7 +10,8 @@ To enable the webgui you must have the following pre-reqs:
 
 1. Naviagte to the APIC namespace where the gateway is deployed to and go into the Installed Operators > ibm-connect operator > All instances tab > apic-gw > inside the yaml, update the webGUIManagementEnabled to **true**.  
 You may also patch the custom resource with the following oc cli command:
-NOTE: The apic-gw below may be named different for you depending on how you named your apic cluster. If you named it apiconnect, the resource name would be apiconnect-gw, rather than apic-gw.  
+  
+_NOTE: The apic-gw below may be named different for you depending on how you named your apic cluster. If you named it apiconnect, the resource name would be apiconnect-gw, rather than apic-gw._  
 ```
 oc patch gatewaycluster.gateway.apiconnect.ibm.com apic-gw --type=json -p '[{"op":"replace","path":"/spec/webGUIManagementEnabled","value":true}]'
 ```  
@@ -23,7 +24,8 @@ oc create route passthrough datapower-ui --service=apic-gw-datapower --port=9090
 
 3. Once the route is created, you may find the endpoint with `oc get route` to navigate to the DataPower webgui.  
 4. The following will get you the password for the admin login:
-NOTE: The apic-gw-admin below may be named different for you depending on how you named your apic cluster. If you named it apiconnect, the resource name would be apiconnect-gw-admin, rather than apic-gw-admin.  
+   
+_NOTE: The apic-gw-admin below may be named different for you depending on how you named your apic cluster. If you named it apiconnect, the resource name would be apiconnect-gw-admin, rather than apic-gw-admin._  
 ```  
 oc get secret apic-gw-admin -o jsonpath="{.data.password}" | base64 -d
 ```
